@@ -7,7 +7,7 @@ class BoardContainer extends Component {
     this.state = {
       squares: Array(3).fill(Array(3).fill("⬜️")),
       player: "❌",
-      isGameOver: false
+      gameStatus: 'playing'
     }
     this.baseState = this.state
   }
@@ -15,11 +15,8 @@ class BoardContainer extends Component {
     if(event.target.innerHTML === "⬜️"){
       event.target.innerHTML = this.state.player
       event.target.classList.add('marked')
-      if(this.gameOverCheck()){
-        this.setState({
-          isGameOver: true
-        })
-      } else {
+      this.gameOverCheck()
+      if(this.state.gameStatus === 'playing'){
         if(this.state.player === "❌"){
           this.setState({
             player:"⭕️"
@@ -32,6 +29,7 @@ class BoardContainer extends Component {
       }
     }
   }
+
   gameOverCheck = () => {
     function checkDiagonals(squaresList){
       if(squaresList[4].innerHTML !== "⬜️"){
@@ -77,16 +75,18 @@ class BoardContainer extends Component {
     }
     const squaresList = Array.from(document.getElementsByClassName('Square'))
     const markedSquares = squaresList.filter(square => Array.from(square.classList).includes('marked'))
-    if(squaresList.length === markedSquares.length){
-      return true
+    const matrix = [ squaresList.slice(0,3) , squaresList.slice(3,6) , squaresList.slice(6)]
+    if(checkDiagonals(squaresList)){
+      this.setState({ gameStatus: this.state.player}) 
+    } else if(checkHorizontal(matrix)){
+      this.setState({ gameStatus: this.state.player}) 
+    } else if(checkVertical(matrix)) {
+      this.setState({ gameStatus: this.state.player}) 
+    } else if(squaresList.length === markedSquares.length){
+      this.setState({ gameStatus: 'match'}) 
     } else{
-      const matrix = [ squaresList.slice(0,3) , squaresList.slice(3,6) , squaresList.slice(6)]
-      if(checkDiagonals(squaresList)) return true
-      if(checkHorizontal(matrix)) return true
-      if(checkVertical(matrix)) return true
-      return false
+      this.setState({ gameStatus: 'playing'}) 
     }
-
   }
   handlePlayAgainClick =  event =>{
     this.setState(
@@ -103,12 +103,19 @@ class BoardContainer extends Component {
       <div>
         <h1>Tic-Tac-Toe</h1>
         {
-          this.state.isGameOver && 
-          <Modal 
-            modalMessage={`Good luck next time ${this.state.player === "❌" ? "⭕️" : "❌"} !`} 
-            winner={`🎊 ${this.state.player} wins !🎊`}
-            handlePlayAgainClick={this.handlePlayAgainClick}
-            />
+        this.state.gameStatus !== 'playing' &&
+          (this.state.gameStatus === 'match' ?
+            <Modal 
+              modalMessage={`Revenge?`} 
+              winner={`🎊 All wins!🎊`}
+              handlePlayAgainClick={this.handlePlayAgainClick}
+              />
+            :
+            <Modal 
+              modalMessage={`Good luck next time ${this.state.gameStatus === "❌" ? "⭕️" : "❌"} !`} 
+              winner={`🎊 ${this.state.gameStatus} wins !🎊`}
+              handlePlayAgainClick={this.handlePlayAgainClick}
+              />)
         } 
         <Board 
           squares={this.state.squares}

@@ -9,7 +9,7 @@ const Modal = props=> {
       <h3>{winner}</h3>
       <hr/>
       <p>{modalMessage}</p>
-      <h1>🥔</h1>
+      <h1 title="Beautiful Potatoe">🥔</h1>
       <Button onClick={props.handlePlayAgainClick}>Play Again</Button>
     </div>
   </div>
