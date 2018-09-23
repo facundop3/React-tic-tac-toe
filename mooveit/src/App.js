@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import SayHi from './custom-component/component/cutom-component'
 import TicTacToe from './TicTacToe/containers/Board-container'
