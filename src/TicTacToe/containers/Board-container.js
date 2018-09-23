@@ -90,7 +90,7 @@ class BoardContainer extends Component {
   }
   handlePlayAgainClick =  event =>{
     this.setState(
-      this.baseState
+      ...this.baseState
     )
     const squaresList = Array.from(document.getElementsByClassName("Square"))
     squaresList.map(square =>{
@@ -106,7 +106,7 @@ class BoardContainer extends Component {
         this.state.gameStatus !== 'playing' &&
           (this.state.gameStatus === 'match' ?
             <Modal 
-              modalMessage={`Revenge?`} 
+              modalMessage={`Rematch?`} 
               winner={`🎊 All wins!🎊`}
               handlePlayAgainClick={this.handlePlayAgainClick}
               />
