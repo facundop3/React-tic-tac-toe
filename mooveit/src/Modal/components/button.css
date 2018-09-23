@@ -1,0 +1,24 @@
+.Button{
+  text-align: center;
+  background-color: lightgray;
+  padding: .6em .8em 0.8em 0.8em;
+  border: none;
+  color: white;
+  margin: 5px;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: inset 0 -.2em rgba(0,0,0 , 0.3);
+  outline: 0;
+  transition: .7s;
+  will-change: transform;
+}
+.Button:active{
+  transform: scale(0.6);
+}
+.Button.danger{
+  background: red;
+}
+.Button.primary{
+  background: #7dc800;
+}

@@ -1,0 +1,50 @@
+.div-container{
+  position: fixed;
+  z-index: 3;
+}
+.Modal-box{
+  width: 200px;
+  background: #2a2e4b;
+  border: none;
+  border-radius: 9px;
+  box-shadow: inset 0 -0.5em rgba(0,0,0 , 0.3);
+  animation-duration: 1s;
+  color: aliceblue;
+  font-family: Arial;
+  font-size: 16px;
+  will-change: transform;
+  animation-name: ModalKeyFrames;
+  margin: 0 auto;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 20%;
+  padding: .5em;
+  display: inline-block;
+  will-change: transform;
+  transition: .5s;
+}
+.Modal-box:active{
+  transform: scale(.9);
+}
+
+@keyframes ModalKeyFrames {
+  from {
+    transform: translateY(40px);
+  }
+  20% {
+    transform: translateY(-35px);
+  }
+  40% {
+    transform: translateY(25px);
+  }
+  60%{
+    transform: translateY(-15px);
+  }
+  80% {
+    transform: translateY(5px);
+  }
+  to {
+    transform: translateY(0)
+  }
+}
