@@ -90,7 +90,7 @@ class BoardContainer extends Component {
   }
   handlePlayAgainClick =  event =>{
     this.setState(
-      ...this.baseState
+      this.baseState
     )
     const squaresList = Array.from(document.getElementsByClassName("Square"))
     squaresList.map(square =>{
